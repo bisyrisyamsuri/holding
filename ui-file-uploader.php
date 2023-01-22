@@ -1,5 +1,8 @@
 <?php
-require 'database/db.php';
+    require 'database/db.php';
+    require 'database/database-action.php';
+
+    $coba;
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +11,7 @@ require 'database/db.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Uploader - Mazer Admin Dashboard</title>
+    <title>Form Kerjasama</title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -418,8 +421,6 @@ require 'database/db.php';
     </div>
     <section class="section">
         <div class="row">
-                            
-                        
                 <!-- // Basic Vertical form layout section end -->
             </div>
             <div class="col-12 col-md-12">
@@ -441,7 +442,9 @@ require 'database/db.php';
                                                             <div class="position-relative">
                                                                 <input type="text" class="form-control"
                                                                     placeholder="Jika tidak ada silahkan login terlebih dahulu"
-                                                                    id="first-name-icon">
+                                                                    id="first-name-icon"
+                                                                    name="input-user-name"
+                                                                    value = "<?php $databaseAction->GetUser($koneksi)?>">
                                                                 <div class="form-control-icon">
                                                                     <i class="bi bi-person"></i>
                                                                 </div>
@@ -452,19 +455,18 @@ require 'database/db.php';
                                                         <div class="card-content">
                                                             <label for="email-id-icon">Proposal Bisnis</label>
                                                             <p style="font-weight:500;">Silahkan masukkan proposal bisnis anda (format pdf)</p>
-                                                            <div class="card-body pt-1">
-                                                                <input type="file" class="multiple-files-filepond" multiple>
-                                                                
-                                                            </div>
+                                                            <!-- <div class="card-body pt-1"> -->
+                                                                <input type="file" name="input-proposal-bisnis" class="multiple-files-filepond" multiple>
+                                                            <!-- </div> -->
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="card-content">
                                                             <label for="email-id-icon">Cash Flow</label>
                                                             <p style="font-weight:500;">Silahkan masukkan cash flow dari bisnis anda (format pdf)</p>
-                                                            <div class="card-body pt-1">
-                                                                <input type="file" class="Multiple-files-filepond" multiple>                                                             
-                                                            </div>
+                                                            <!-- <div class="card-body pt-1"> -->
+                                                                <input type="file" name="input-cash-flow" class="Multiple-files-filepond" multiple>                                                             
+                                                            <!-- </div> -->
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -472,8 +474,11 @@ require 'database/db.php';
                                                             <label for="first-name-icon">Rencana Kerjasama</label>
                                                             <p style="font-weight:500;">Silahkan jelaskan rencana kerja sama anda dengan pusat bisnis UIN Malang</p>
                                                             <div class="position-relative">
-                                                                <div class="card-body pt-1">
-                                                                    <div id="summernote"></div>
+                                                                <!-- <div class="card-body pt-1"> -->
+                                                                    <!-- <div id="summernote">Coba coba</div> -->
+                                                                    <div class="input-group">
+                                                                        <textarea name="textarea-rencana-kerjasama" class="form-control" rows="10" style="height:100%;" ></textarea>
+                                                                    <!-- </div> -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -488,7 +493,7 @@ require 'database/db.php';
                                                         <!-- </div> -->
                                                     <!-- </div> -->
                                                     <div class="col-12 d-flex justify-content-end">
-                                                        <button type="submit"
+                                                        <button type="submit" name="btn-submit"
                                                             class="btn btn-primary me-1 mb-1">Submit</button>
                                                         <button type="reset"
                                                             class="btn btn-light-secondary me-1 mb-1">Reset</button>
@@ -747,6 +752,7 @@ require 'database/db.php';
             height: 120,
             
         })
+
         $("#hint").summernote({
             height: 100,
             toolbar: false,
