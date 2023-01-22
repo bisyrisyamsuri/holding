@@ -1,3 +1,7 @@
+<?php
+require 'database/db.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
