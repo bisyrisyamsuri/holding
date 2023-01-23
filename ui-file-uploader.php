@@ -433,7 +433,7 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form form-vertical">
+                                        <form class="form form-vertical" action="database/upload.php" method="POST" enctype="multipart/form-data">
                                             <div class="form-body">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -451,21 +451,21 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 mb">
                                                         <div class="card-content">
                                                             <label for="email-id-icon">Proposal Bisnis</label>
                                                             <p style="font-weight:500;">Silahkan masukkan proposal bisnis anda (format pdf)</p>
                                                             <!-- <div class="card-body pt-1"> -->
-                                                                <input type="file" name="input-proposal-bisnis" class="multiple-files-filepond" multiple>
+                                                                <input type="file" name="input-proposal-bisnis" id="input-file" accept="application/pdf"  >
                                                             <!-- </div> -->
                                                         </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 mb">
                                                         <div class="card-content">
                                                             <label for="email-id-icon">Cash Flow</label>
                                                             <p style="font-weight:500;">Silahkan masukkan cash flow dari bisnis anda (format pdf)</p>
                                                             <!-- <div class="card-body pt-1"> -->
-                                                                <input type="file" name="input-cash-flow" class="Multiple-files-filepond" multiple>                                                             
+                                                                <input type="file" name="input-cash-flow" accept="application/pdf">                                                             
                                                             <!-- </div> -->
                                                         </div>
                                                     </div>
@@ -554,221 +554,6 @@
 
     <script src="assets/vendors/jquery/jquery.min.js"></script>
     <script src="assets/vendors/summernote/summernote-lite.min.js"></script>
-<script>
-    // register desired plugins...
-	FilePond.registerPlugin(
-        // validates the size of the file...
-        FilePondPluginFileValidateSize,
-        // validates the file type...
-        FilePondPluginFileValidateType,
-
-        // calculates & dds cropping info based on the input image dimensions and the set crop ratio...
-        FilePondPluginImageCrop,
-        // preview the image file type...
-        FilePondPluginImagePreview,
-        // filter the image file
-        FilePondPluginImageFilter,
-        // corrects mobile image orientation...
-        FilePondPluginImageExifOrientation,
-        // calculates & adds resize information...
-        FilePondPluginImageResize,
-    );
-    
-    // Filepond: Basic
-    FilePond.create( document.querySelector('.basic-filepond'), { 
-        allowImagePreview: false,
-        allowMultiple: false,
-        allowFileEncode: false,
-        required: false
-    });
-
-    // Filepond: Multiple Files
-    FilePond.create( document.querySelector('.multiple-files-filepond'), { 
-        allowImagePreview: false,
-        allowMultiple: true,
-        allowFileEncode: false,
-        required: false
-    });
-    FilePond.create( document.querySelector('.Multiple-files-filepond'), { 
-        allowImagePreview: false,
-        allowMultiple: true,
-        allowFileEncode: false,
-        required: false
-    });
-
-    // Filepond: With Validation
-    FilePond.create( document.querySelector('.with-validation-filepond'), { 
-        allowImagePreview: false,
-        allowMultiple: true,
-        allowFileEncode: false,
-        required: true,
-        acceptedFileTypes: ['image/png'],
-        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            // Do custom type detection here and return with promise
-            resolve(type);
-        })
-    });
-
-    // Filepond: ImgBB with server property
-    FilePond.create( document.querySelector('.imgbb-filepond'), { 
-        allowImagePreview: false, 
-        server: {
-            process: (fieldName, file, metadata, load, error, progress, abort) => {
-                // We ignore the metadata property and only send the file
-
-                const formData = new FormData();
-                formData.append(fieldName, file, file.name);
-
-                const request = new XMLHttpRequest();
-                // you can change it by your client api key
-                request.open('POST', 'https://api.imgbb.com/1/upload?key=762894e2014f83c023b233b2f10395e2');
-
-                request.upload.onprogress = (e) => {
-                    progress(e.lengthComputable, e.loaded, e.total);
-                };
-
-                request.onload = function() {
-                    if (request.status >= 200 && request.status < 300) {
-                        load(request.responseText);
-                    }
-                    else {
-                        error('oh no');
-                    }
-                };
-
-                request.onreadystatechange = function() {
-                    if (this.readyState == 4) {
-                        if(this.status == 200) {
-                            let response = JSON.parse(this.responseText);
-                            
-                            Toastify({
-                                text: "Success uploading to imgbb! see console f12",
-                                duration: 3000,
-                                close:true,
-                                gravity:"bottom",
-                                position: "right",
-                                backgroundColor: "#4fbe87",
-                            }).showToast();
-                
-                            console.log(response);
-                        } else {
-                            Toastify({
-                                text: "Failed uploading to imgbb! see console f12",
-                                duration: 3000,
-                                close:true,
-                                gravity:"bottom",
-                                position: "right",
-                                backgroundColor: "#ff0000",
-                            }).showToast();   
-
-                            console.log("Error", this.statusText);
-                        }
-                    }
-                };
-
-                request.send(formData);
-            }
-        }
-    });
-
-    // Filepond: Image Preview
-    FilePond.create( document.querySelector('.image-preview-filepond'), { 
-        allowImagePreview: true, 
-        allowImageFilter: false,
-        allowImageExifOrientation: false,
-        allowImageCrop: false,
-        acceptedFileTypes: ['image/png','image/jpg','image/jpeg'],
-        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            // Do custom type detection here and return with promise
-            resolve(type);
-        })
-    });
-
-    // Filepond: Image Crop
-    FilePond.create( document.querySelector('.image-crop-filepond'), { 
-        allowImagePreview: true, 
-        allowImageFilter: false,
-        allowImageExifOrientation: false,
-        allowImageCrop: true,
-        acceptedFileTypes: ['image/png','image/jpg','image/jpeg'],
-        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            // Do custom type detection here and return with promise
-            resolve(type);
-        })
-    });
-
-        // Filepond: Image Exif Orientation
-    FilePond.create( document.querySelector('.image-exif-filepond'), { 
-        allowImagePreview: true, 
-        allowImageFilter: false,
-        allowImageExifOrientation: true,
-        allowImageCrop: false,
-        acceptedFileTypes: ['image/png','image/jpg','image/jpeg'],
-        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            // Do custom type detection here and return with promise
-            resolve(type);
-        })
-    });
-
-    // Filepond: Image Filter
-    FilePond.create( document.querySelector('.image-filter-filepond'), {
-        allowImagePreview: true, 
-        allowImageFilter: true,
-        allowImageExifOrientation: false,
-        allowImageCrop: false,
-        imageFilterColorMatrix: [
-            0.299, 0.587, 0.114, 0, 0,
-            0.299, 0.587, 0.114, 0, 0,
-            0.299, 0.587, 0.114, 0, 0,
-            0.000, 0.000, 0.000, 1, 0
-        ],
-        acceptedFileTypes: ['image/png','image/jpg','image/jpeg'],
-        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            // Do custom type detection here and return with promise
-            resolve(type);
-        })
-    });
-
-    // Filepond: Image Resize
-    FilePond.create( document.querySelector('.image-resize-filepond'), {
-        allowImagePreview: true, 
-        allowImageFilter: false,
-        allowImageExifOrientation: false,
-        allowImageCrop: false,
-        allowImageResize: true,
-        imageResizeTargetWidth: 200,
-        imageResizeTargetHeight: 200,
-        imageResizeMode: 'cover',
-        imageResizeUpscale: true,
-        acceptedFileTypes: ['image/png','image/jpg','image/jpeg'],
-        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            // Do custom type detection here and return with promise
-            resolve(type);
-        })
-    });
-    
-        $('#summernote').summernote({
-            tabsize: 2,
-            height: 120,
-            
-        })
-
-        $("#hint").summernote({
-            height: 100,
-            toolbar: false,
-            placeholder: 'type with apple, orange, watermelon and lemon',
-            hint: {
-                words: ['apple', 'orange', 'watermelon', 'lemon'],
-                match: /\b(\w{1,})$/,
-                search: function (keyword, callback) {
-                    callback($.grep(this.words, function (item) {
-                        return item.indexOf(keyword) === 0;
-                    }));
-                }
-            }
-        });
-
-</script>
 
     <script src="assets/js/main.js"></script>
 </body>
