@@ -1,3 +1,17 @@
+<?php
+require "database/koneksi.php";
+function query($sql)
+{
+    global $conn;
+    $hasil_query = mysqli_query($conn, $sql);
+    $data_hasil_query = array();
+    while ($record_hasil_query = mysqli_fetch_assoc($hasil_query)) {
+        $data_hasil_query[] = $record_hasil_query;
+    }
+    return $data_hasil_query;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +32,12 @@
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style type="text/css">
-      #map {
-        height: 400px;
-      }
+        #map {
+            height: 400px;
+        }
     </style>
 </head>
 
@@ -406,8 +422,17 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Jumlah Kerjasama</h6>
-                                                <h6 class="font-extrabold mb-0">183.000</h6>
+                                                <?php
+                                                $sql = "SELECT * FROM db_tesdata WHERE id=1";
+                                                $data_chart = query($sql);
+                                                foreach ($data_chart as $dc) :
+                                                ?>
+                                                    <h6 class="text-muted font-semibold">Jumlah Kerjasama</h6>
+                                                    <h6 class="font-extrabold mb-0"><?php echo $dc['angka2'] ?></h6>
+                                                <?php
+                                                endforeach
+                                                ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -440,7 +465,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Jumlah Kategori Bisnis</h6>
+                                                <h6 class="text-muted font-semibold">Kategori Bisnis</h6>
                                                 <h6 class="font-extrabold mb-0">4</h6>
                                             </div>
                                         </div>
@@ -465,7 +490,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" onload=getDataChart()>
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
@@ -478,57 +503,67 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 col-xl-12">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Progress Per-Kategori</h4>
+                                        <h4>Halal Industri</h4>
                                     </div>
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-lg">
-                                                <tr>
-                                                    <td class="col-3">Halal Industri</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-info">
-                                                            <div class="progress-bar" role="progressbar" style="width: 60%"
-                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <?php
+                                        $sql = "SELECT * FROM db_tesdata WHERE id=1";
+                                        $data_chart = query($sql);
+                                        foreach ($data_chart as $dc) :
+                                        ?>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <svg class="bi text-success" width="32" height="32" fill="blue" style="width:10px">
+                                                            <use xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                        </svg>
+                                                        <b>
+                                                            <p class="mb-0 ms-3">Target Bisnis</p>
+                                                        </b>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12  mt-2">
+                                                    <div class="progress progress-alert-dark" style="height:40px;">
+                                                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                            <span class="progress-bar-label" style="font-size: 16px;">Rp <?php echo $dc['angka2'] ?></span>
                                                         </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">60%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Service and Retail</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-success">
-                                                            <div class="progress-bar" role="progressbar" style="width: 35%"
-                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <div class="col-6 mt-2">
+                                                        <h6 class="mb-0">100%</h6>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 mt-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <svg class="bi text-danger" width="32" height="32" fill="blue" style="width:10px">
+                                                            <use xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                        </svg>
+                                                        <b>
+                                                            <p class="mb-0 ms-3">Pencapaian Saat Ini</p>
+                                                        </b>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-2">
+
+                                                    <div class="progress progress-danger" style="height: 38px;">
+                                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $dc['angka3'] ?>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                            <span class="progress-bar-label" style="font-size: 16px;">Rp <?php echo $dc['angka2'] ?></span>
                                                         </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">30%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Property</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-danger">
-                                                            <div class="progress-bar" role="progressbar" style="width: 50%"
-                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">50%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Medical Center</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-primary">
-                                                            <div class="progress-bar" role="progressbar" style="width: 80%"
-                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">80%</td>
-                                                </tr>
-                                                
-                                            </table>
-                                        </div>
+                                                    </div>
+                                                    <div class="col-6 mt-2">
+                                                        <h6 class="mb-0"><?php echo $dc['angka3'] ?>%</h6>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        <?php
+                                        endforeach
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -604,8 +639,7 @@
                         <p>2021 &copy; Mazer</p>
                     </div>
                     <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="http://ahmadsaugi.com">A. Saugi</a></p>
+                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="http://ahmadsaugi.com">A. Saugi</a></p>
                     </div>
                 </div>
             </footer>
@@ -618,6 +652,9 @@
     <script src="assets/js/pages/dashboard.js"></script>
 
     <script src="assets/js/main.js"></script>
+
+
+
 </body>
 
 </html>
