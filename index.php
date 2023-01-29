@@ -60,8 +60,18 @@ require_once("auth.php");
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Kerjasama</h6>
-                                                <h6 class="font-extrabold mb-0">183.000</h6>
+                                            
+                                                <?php
+                                                $sql = "SELECT * FROM db_tesdata WHERE id=1";
+                                                $data_chart = query($sql);
+                                                foreach ($data_chart as $dc) :
+                                                ?>
+                                                    <h6 class="text-muted font-semibold">Jumlah Kerjasama</h6>
+                                                    <h6 class="font-extrabold mb-0"><?php echo $dc['angka3'] ?></h6>
+                                                <?php
+                                                endforeach
+                                                ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -138,52 +148,65 @@ require_once("auth.php");
                                         <h4>Progress Per-Kategori</h4>
                                     </div>
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-lg">
-                                                <tr>
-                                                    <td class="col-3">Halal Industri</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-info">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 60%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
+                                        <?php
+                                        $sql = 
+                                        "SELECT tb_bisnis.id_jenispelayanan, tb_jenislayanan.id_layanan, tb_kategoribisnis.id_kategori, tb_kategoribisnis.target_capaian,  
+                                        SUM(nilai_kerjasama) as nilai_kerjasama,
+                                        CONCAT(ROUND((SUM(nilai_kerjasama) / (target_capaian))*100,2),'%') as percentage
+                                        FROM tb_bisnis
+                                        JOIN tb_jenislayanan
+                                        ON tb_bisnis.id_jenispelayanan = tb_jenislayanan.id_layanan
+                                        JOIN tb_kategoribisnis
+                                        ON tb_jenislayanan.id_kategori = tb_kategoribisnis.id_kategori
+                                        WHERE tb_kategoribisnis.id_kategori = 1 ";
+
+                                        $data_chart = query($sql);
+                                        foreach ($data_chart as $dc) :
+                                        ?>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <svg class="bi text-success" width="32" height="32" fill="blue" style="width:10px">
+                                                            <use xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                        </svg>
+                                                        <b>
+                                                            <p class="mb-0 ms-3">Target Bisnis</p>
+                                                        </b>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12  mt-2">
+                                                    <div class="progress progress-alert-dark" style="height:40px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="progress-bar-label" style="font-size: 16px;">Rp <?php echo number_format($dc['target_capaian'], 0, ",", "."); ?></span>
+                                                    </div>
+                                                </div>
+                                                    <div class="col-6 mt-2">
+                                                        <h6 class="mb-0">100%</h6>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 mt-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <svg class="bi text-danger" width="32" height="32" fill="blue" style="width:10px">
+                                                            <use xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                        </svg>
+                                                        <b>
+                                                            <p class="mb-0 ms-3">Pencapaian Saat Ini</p>
+                                                        </b>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-2">
+
+                                                    <div class="progress progress-danger" style="height: 38px;">
+                                                        <div class="progress-bar" role="progressbar" style="width:<?php echo $dc['percentage']?>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                            <span class="progress-bar-label align-items-center" style="font-size: 16px; text-shadow: 0 0 1px #000;">Rp <?php echo number_format($dc['nilai_kerjasama'], 0, ",", "."); ?></span>
                                                         </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">60%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Service and Retail</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-success">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 35%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">30%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Property</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-danger">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 50%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">50%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Medical Center</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-primary">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 80%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">80%</td>
-                                                </tr>
+                                                    </div>
+                                                    <div class="col-6 mt-2">
+                                                        <h6 class="mb-0"><?php echo $dc['percentage']?>%</h6>
+                                                    </div>
 
                                             </table>
                                         </div>
