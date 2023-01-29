@@ -2,20 +2,21 @@
 
 include 'koneksi.php';
 
-$query = "SELECT bulan, angka2 FROM db_tesdata";
-$result = mysqli_query($conn, $query);
 
-$bulan = [];
-$angka = [];
+$query = "SELECT 
+MONTH(date) as bulan, 
+SUM(nilai_kerjasama) as total_pendapatan 
+FROM tb_bisnis GROUP BY bulan ORDER BY bulan ASC";
+$result = mysqli_query($conn, $query);
 
 while($row = mysqli_fetch_assoc($result)) {
     $bulan[] = $row['bulan'];
-    $angka[] = $row['angka2'];
+    $angka[] = $row['total_pendapatan'];
 }
 
 $response = [
     'bulan' => $bulan,
-    'angka2' => $angka
+    'angka' => $angka 
 ];
 
 echo json_encode($response);
