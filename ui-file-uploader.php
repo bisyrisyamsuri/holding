@@ -1,5 +1,5 @@
 <?php
-    require 'database/db.php';
+    require 'database/koneksi.php';
     require 'database/database-action.php';
 
     $coba;
