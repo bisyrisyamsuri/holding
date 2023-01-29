@@ -24,9 +24,9 @@ var optionsProfileVisit = {
 	},
 }
 let optionsVisitorsProfile  = {
-	series: [25, 35, 20, 20],
-	labels: ['Halal Industry', 'Service and Retail', 'Property', 'Medical Center'],
-	colors: ['#0dcaf0', '#198754', '#dc3545','#435ebe'],
+	series: [70, 30],
+	labels: ['Male', 'Female'],
+	colors: ['#435ebe','#55c6e8'],
 	chart: {
 		type: 'donut',
 		width: '100%',

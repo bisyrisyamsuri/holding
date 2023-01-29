@@ -1,0 +1,68 @@
+<aside>
+    <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+            <div class="sidebar-header">
+                <div class="d-flex justify-content-center">
+                    <div class="logo">
+                        <a href="index.php"><img
+                                src="https://p2b.uin-malang.ac.id/wp-content/uploads/2021/12/cropped-logo-anyar-4.png"
+                                alt="Logo" srcset="" /></a>
+                    </div>
+                    <div class="toggler">
+                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <ul class="menu">
+                    <li class="sidebar-title">Menu</li>
+                    
+                    <li class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/web_holding/index.php') echo 'sidebar-item active'; ?>">
+                        <a href="index.php" class="sidebar-link">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/web_holding/ui-file-uploader.php') echo 'sidebar-item active'; ?>">
+                        <a href="ui-file-uploader.php" class="sidebar-link">
+                            <i class="bi bi-cloud-arrow-up-fill"></i>
+                            <span>Form Kerjasama</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/web_holding/ui-map-google-map.php') echo 'sidebar-item active'; ?>">
+                        <a href="ui-map-google-map.php" class="sidebar-link">
+                            <i class="bi bi-map-fill"></i>
+                            <span>Maps</span>
+                        </a>
+                    </li>
+
+                    <?php
+                        if($_SESSION['role'] == 1)echo'
+                    
+                    
+                    <li class="sidebar-item has-sub">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Kelola</span>
+                        </a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <a href="#">Logout</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="auth-register.php">Register</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="auth-forgot-password.php">Forgot Password</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <?php';?>
+                </ul>
+            </div>
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+</aside>
