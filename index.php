@@ -1,15 +1,5 @@
 <?php
-require "database/koneksi.php";
-function query($sql)
-{
-    global $conn;
-    $hasil_query = mysqli_query($conn, $sql);
-    $data_hasil_query = array();
-    while ($record_hasil_query = mysqli_fetch_assoc($hasil_query)) {
-        $data_hasil_query[] = $record_hasil_query;
-    }
-    return $data_hasil_query;
-}
+require_once("auth.php");
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +22,6 @@ function query($sql)
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <style type="text/css">
         #map {
             height: 400px;
@@ -44,369 +32,19 @@ function query($sql)
 <body>
     <div id="app">
         <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-center">
-                        <div class="logo">
-                            <a href="index.html"><img src="https://p2b.uin-malang.ac.id/wp-content/uploads/2021/12/cropped-logo-anyar-4.png" alt="Logo" srcset=""></a>
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <!-- <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>Components</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="component-alert.html">Alert</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-badge.html">Badge</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-breadcrumb.html">Breadcrumb</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-button.html">Button</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-card.html">Card</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-carousel.html">Carousel</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-dropdown.html">Dropdown</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-list-group.html">List Group</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-modal.html">Modal</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-navs.html">Navs</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-pagination.html">Pagination</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-progress.html">Progress</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-spinner.html">Spinner</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-tooltip.html">Tooltip</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>Extra Components</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">Avatar</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">Sweet Alert</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-toastify.html">Toastify</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-rating.html">Rating</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-divider.html">Divider</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Layouts</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="layout-default.html">Default Layout</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">1 Column</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-navbar.html">Vertical with Navbar</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-horizontal.html">Horizontal Menu</a>
-                                </li>
-                            </ul>
-                        </li> -->
-
-                        <!-- <li class="sidebar-title">Forms &amp; Tables</li> -->
-
-                        <!-- <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-hexagon-fill"></i>
-                                <span>Form Elements</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-element-input.html">Input</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-input-group.html">Input Group</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-select.html">Select</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-radio.html">Radio</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-checkbox.html">Checkbox</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-textarea.html">Textarea</a>
-                                </li>
-                            </ul>
-                        </li> -->
-
-                        <!-- <li class="sidebar-item  ">
-                            <a href="form-layout.html" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Form Kerjasama</span>
-                            </a>
-                        </li> -->
-
-                        <!-- <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-pen-fill"></i>
-                                <span>Form Editor</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">Quill</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">CKEditor</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">Summernote</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-tinymce.html">TinyMCE</a>
-                                </li>
-                            </ul>
-                        </li> -->
-
-                        <!-- <li class="sidebar-item  ">
-                            <a href="table.html" class='sidebar-link'>
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Table</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="table-datatable.html" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Datatable</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-title">Extra UI</li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-pentagon-fill"></i>
-                                <span>Widgets</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="ui-widgets-chatbox.html">Chatbox</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="ui-widgets-pricing.html">Pricing</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="ui-widgets-todolist.html">To-do List</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-egg-fill"></i>
-                                <span>Icons</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="ui-icons-bootstrap-icons.html">Bootstrap Icons </a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="ui-icons-fontawesome.html">Fontawesome</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="ui-icons-dripicons.html">Dripicons</a>
-                                </li>
-                            </ul>
-                        </li> -->
-
-                        <!-- <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-bar-chart-fill"></i>
-                                <span>Charts</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="ui-chart-chartjs.html">ChartJS</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="ui-chart-apexcharts.html">Apexcharts</a>
-                                </li>
-                            </ul>
-                        </li> -->
-
-                        <li class="sidebar-item  ">
-                            <a href="ui-file-uploader.html" class='sidebar-link'>
-                                <i class="bi bi-cloud-arrow-up-fill"></i>
-                                <span>Form Kerjasama</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="ui-map-google-map.html" class='sidebar-link'>
-                                <i class="bi bi-map-fill"></i>
-                                <span>Maps</span>
-                            </a>
-                            <!-- <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="ui-map-google-map.html">Google Map</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="ui-map-jsvectormap.html">JS Vector Map</a>
-                                </li>
-                            </ul> -->
-                        </li>
-
-                        <!-- <li class="sidebar-title">Pages</li>
-
-                        <li class="sidebar-item  ">
-                            <a href="application-email.html" class='sidebar-link'>
-                                <i class="bi bi-envelope-fill"></i>
-                                <span>Email Application</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="application-chat.html" class='sidebar-link'>
-                                <i class="bi bi-chat-dots-fill"></i>
-                                <span>Chat Application</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="application-gallery.html" class='sidebar-link'>
-                                <i class="bi bi-image-fill"></i>
-                                <span>Photo Gallery</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="application-checkout.html" class='sidebar-link'>
-                                <i class="bi bi-basket-fill"></i>
-                                <span>Checkout Page</span>
-                            </a>
-                        </li> -->
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-person-badge-fill"></i>
-                                <span>Authentication</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="auth-login.html">Login</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="auth-register.html">Register</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="auth-forgot-password.html">Forgot Password</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-x-octagon-fill"></i>
-                                <span>Errors</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="error-403.html">403</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="error-404.html">404</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="error-500.html">500</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-title">Raise Support</li>
-
-                        <li class="sidebar-item  ">
-                            <a href="https://zuramai.github.io/mazer/docs" class='sidebar-link'>
-                                <i class="bi bi-life-preserver"></i>
-                                <span>Documentation</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="https://github.com/zuramai/mazer/blob/main/CONTRIBUTING.md" class='sidebar-link'>
-                                <i class="bi bi-puzzle"></i>
-                                <span>Contribute</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="https://github.com/zuramai/mazer#donate" class='sidebar-link'>
-                                <i class="bi bi-cash"></i>
-                                <span>Donate</span>
-                            </a>
-                        </li> -->
-
-                    </ul>
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-            </div>
+            <?php include 'layout-sidebar.html'; ?>
         </div>
-        <div id="main">
+
+        <div id="main" class='px-4 layout-navbar'>
             <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
+                <nav class="px-0 navbar navbar-expand navbar-light ">
+                    <div class="px-0 container-fluid">
+                        <a href="#" class="burger-btn d-block">
+                            <i class="bi bi-justify fs-3"></i>
+                        </a>
+                        <?php include 'layout-navbar.html'; ?>
+                    </div>
+                </nav>
             </header>
             <div class="page-content">
                 <section class="row">
@@ -414,7 +52,7 @@ function query($sql)
                         <div class="row">
                             <div class="col-6 col-lg-3 col-md-6">
                                 <div class="card">
-                                    <div class="card-body px-3 py-4-5">
+                                    <div class="card-body px-1 py-4-5">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="stats-icon purple">
@@ -422,6 +60,7 @@ function query($sql)
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
+                                            
                                                 <?php
                                                 $sql = "SELECT * FROM db_tesdata WHERE id=1";
                                                 $data_chart = query($sql);
@@ -440,7 +79,7 @@ function query($sql)
                             </div>
                             <div class="col-6 col-lg-3 col-md-6">
                                 <div class="card">
-                                    <div class="card-body px-3 py-4-5">
+                                    <div class="card-body px-1 py-4-5">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="stats-icon blue">
@@ -448,7 +87,7 @@ function query($sql)
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Jumlah Layanan</h6>
+                                                <h6 class="text-muted font-semibold">Layanan</h6>
                                                 <h6 class="font-extrabold mb-0">24</h6>
                                             </div>
                                         </div>
@@ -457,7 +96,7 @@ function query($sql)
                             </div>
                             <div class="col-6 col-lg-3 col-md-6">
                                 <div class="card">
-                                    <div class="card-body px-3 py-4-5">
+                                    <div class="card-body px-1 py-4-5">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="stats-icon green">
@@ -465,7 +104,7 @@ function query($sql)
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Kategori Bisnis</h6>
+                                                <h6 class="text-muted font-semibold">Kategori</h6>
                                                 <h6 class="font-extrabold mb-0">4</h6>
                                             </div>
                                         </div>
@@ -474,7 +113,7 @@ function query($sql)
                             </div>
                             <div class="col-6 col-lg-3 col-md-6">
                                 <div class="card">
-                                    <div class="card-body px-3 py-4-5">
+                                    <div class="card-body px-1 py-4-5">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="stats-icon red">
@@ -482,7 +121,7 @@ function query($sql)
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Type Kerjasama</h6>
+                                                <h6 class="text-muted font-semibold">Kesepakatan</h6>
                                                 <h6 class="font-extrabold mb-0">3</h6>
                                             </div>
                                         </div>
@@ -490,7 +129,7 @@ function query($sql)
                                 </div>
                             </div>
                         </div>
-                        <div class="row" onload=getDataChart()>
+                        <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
@@ -503,10 +142,10 @@ function query($sql)
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-12 col-xl-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Halal Industri</h4>
+                                        <h4>Progress Per-Kategori</h4>
                                     </div>
                                     <div class="card-body">
                                         <?php
@@ -569,18 +208,15 @@ function query($sql)
                                                         <h6 class="mb-0"><?php echo $dc['percentage']?>%</h6>
                                                     </div>
 
-                                                </div>
-                                            </div>
-                                        <?php
-                                        endforeach
-                                        ?>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
-                        <div class="card">
+                        <!-- <div class="card">
                             <div class="card-body py-4 px-5">
                                 <div class="d-flex align-items-center">
                                     <div class="avatar avatar-xl">
@@ -592,7 +228,7 @@ function query($sql)
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card">
                             <div class="card-header">
                                 <h4>Butuh Approval</h4>
@@ -649,7 +285,8 @@ function query($sql)
                         <p>2021 &copy; Mazer</p>
                     </div>
                     <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="http://ahmadsaugi.com">A. Saugi</a></p>
+                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                                href="http://ahmadsaugi.com">A. Saugi</a></p>
                     </div>
                 </div>
             </footer>
@@ -662,8 +299,7 @@ function query($sql)
     <script src="assets/js/pages/dashboard.js"></script>
 
     <script src="assets/js/main.js"></script>
-
-
+    <script src="assets/js/session.js"></script>
 
 </body>
 

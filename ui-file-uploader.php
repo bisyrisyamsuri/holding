@@ -1,19 +1,37 @@
+<?php
+    require 'database/db.php';
+    require 'database/database-action.php';
+
+    $coba;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Application - Mazer Admin Dashboard</title>
+    <title>Form Kerjasama</title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendors/summernote/summernote-lite.min.css">
     
+<link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+
+<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
 </head>
 
 <body>
@@ -21,9 +39,9 @@
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
     <div class="sidebar-header">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-center">
             <div class="logo">
-                <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                <a href="index.html"><img src="https://p2b.uin-malang.ac.id/wp-content/uploads/2021/12/cropped-logo-anyar-4.png" alt="Logo" srcset=""></a>
             </div>
             <div class="toggler">
                 <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -33,15 +51,15 @@
     <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-title">Menu</li>
-            
-            <li class="sidebar-item  ">
+
+            <li class="sidebar-item ">
                 <a href="index.html" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            
-            <li class="sidebar-item  has-sub">
+
+            <!-- <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-stack"></i>
                     <span>Components</span>
@@ -91,7 +109,7 @@
                     </li>
                 </ul>
             </li>
-            
+
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-collection-fill"></i>
@@ -115,7 +133,7 @@
                     </li>
                 </ul>
             </li>
-            
+
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-grid-1x2-fill"></i>
@@ -135,11 +153,11 @@
                         <a href="layout-horizontal.html">Horizontal Menu</a>
                     </li>
                 </ul>
-            </li>
-            
-            <li class="sidebar-title">Forms &amp; Tables</li>
-            
-            <li class="sidebar-item  has-sub">
+            </li> -->
+
+            <!-- <li class="sidebar-title">Forms &amp; Tables</li> -->
+
+            <!-- <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-hexagon-fill"></i>
                     <span>Form Elements</span>
@@ -164,16 +182,16 @@
                         <a href="form-element-textarea.html">Textarea</a>
                     </li>
                 </ul>
-            </li>
-            
-            <li class="sidebar-item  ">
+            </li> -->
+
+            <!-- <li class="sidebar-item  ">
                 <a href="form-layout.html" class='sidebar-link'>
                     <i class="bi bi-file-earmark-medical-fill"></i>
                     <span>Form Layout</span>
                 </a>
-            </li>
-            
-            <li class="sidebar-item  has-sub">
+            </li> -->
+
+            <!-- <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-pen-fill"></i>
                     <span>Form Editor</span>
@@ -192,24 +210,24 @@
                         <a href="form-editor-tinymce.html">TinyMCE</a>
                     </li>
                 </ul>
-            </li>
-            
-            <li class="sidebar-item  ">
+            </li> -->
+
+            <!-- <li class="sidebar-item  ">
                 <a href="table.html" class='sidebar-link'>
                     <i class="bi bi-grid-1x2-fill"></i>
                     <span>Table</span>
                 </a>
             </li>
-            
+
             <li class="sidebar-item  ">
                 <a href="table-datatable.html" class='sidebar-link'>
                     <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                     <span>Datatable</span>
                 </a>
             </li>
-            
+
             <li class="sidebar-title">Extra UI</li>
-            
+
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-pentagon-fill"></i>
@@ -227,7 +245,7 @@
                     </li>
                 </ul>
             </li>
-            
+
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-egg-fill"></i>
@@ -244,9 +262,9 @@
                         <a href="ui-icons-dripicons.html">Dripicons</a>
                     </li>
                 </ul>
-            </li>
-            
-            <li class="sidebar-item  has-sub">
+            </li> -->
+
+            <!-- <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-bar-chart-fill"></i>
                     <span>Charts</span>
@@ -259,60 +277,60 @@
                         <a href="ui-chart-apexcharts.html">Apexcharts</a>
                     </li>
                 </ul>
-            </li>
-            
-            <li class="sidebar-item  ">
+            </li> -->
+
+            <li class="sidebar-item active ">
                 <a href="ui-file-uploader.html" class='sidebar-link'>
                     <i class="bi bi-cloud-arrow-up-fill"></i>
-                    <span>File Uploader</span>
+                    <span>Form Kerjasama</span>
                 </a>
             </li>
-            
-            <li class="sidebar-item  has-sub">
-                <a href="#" class='sidebar-link'>
+
+            <li class="sidebar-item ">
+                <a href="ui-map-google-map.html" class='sidebar-link'>
                     <i class="bi bi-map-fill"></i>
                     <span>Maps</span>
                 </a>
-                <ul class="submenu ">
+                <!-- <ul class="submenu ">
                     <li class="submenu-item ">
                         <a href="ui-map-google-map.html">Google Map</a>
                     </li>
                     <li class="submenu-item ">
                         <a href="ui-map-jsvectormap.html">JS Vector Map</a>
                     </li>
-                </ul>
+                </ul> -->
             </li>
-            
-            <li class="sidebar-title">Pages</li>
-            
+
+            <!-- <li class="sidebar-title">Pages</li>
+
             <li class="sidebar-item  ">
                 <a href="application-email.html" class='sidebar-link'>
                     <i class="bi bi-envelope-fill"></i>
                     <span>Email Application</span>
                 </a>
             </li>
-            
-            <li class="sidebar-item active ">
+
+            <li class="sidebar-item  ">
                 <a href="application-chat.html" class='sidebar-link'>
                     <i class="bi bi-chat-dots-fill"></i>
                     <span>Chat Application</span>
                 </a>
             </li>
-            
+
             <li class="sidebar-item  ">
                 <a href="application-gallery.html" class='sidebar-link'>
                     <i class="bi bi-image-fill"></i>
                     <span>Photo Gallery</span>
                 </a>
             </li>
-            
+
             <li class="sidebar-item  ">
                 <a href="application-checkout.html" class='sidebar-link'>
                     <i class="bi bi-basket-fill"></i>
                     <span>Checkout Page</span>
                 </a>
-            </li>
-            
+            </li> -->
+
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-person-badge-fill"></i>
@@ -330,8 +348,8 @@
                     </li>
                 </ul>
             </li>
-            
-            <li class="sidebar-item  has-sub">
+
+            <!-- <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i class="bi bi-x-octagon-fill"></i>
                     <span>Errors</span>
@@ -348,30 +366,30 @@
                     </li>
                 </ul>
             </li>
-            
+
             <li class="sidebar-title">Raise Support</li>
-            
+
             <li class="sidebar-item  ">
                 <a href="https://zuramai.github.io/mazer/docs" class='sidebar-link'>
                     <i class="bi bi-life-preserver"></i>
                     <span>Documentation</span>
                 </a>
             </li>
-            
+
             <li class="sidebar-item  ">
                 <a href="https://github.com/zuramai/mazer/blob/main/CONTRIBUTING.md" class='sidebar-link'>
                     <i class="bi bi-puzzle"></i>
                     <span>Contribute</span>
                 </a>
             </li>
-            
+
             <li class="sidebar-item  ">
                 <a href="https://github.com/zuramai/mazer#donate" class='sidebar-link'>
                     <i class="bi bi-cash"></i>
                     <span>Donate</span>
                 </a>
-            </li>
-            
+            </li> -->
+
         </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -388,14 +406,14 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Chat Application</h3>
-                <p class="text-subtitle text-muted">An application for user to check Chat inbox</p>
+                <h3>Form Kerjasama</h3>
+                <p class="text-subtitle text-muted">Merupakan form dari kerjasama pusat bisnis UIN Malang</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Chat Application</li>
+                        <li class="breadcrumb-item active" aria-current="page">Form Kerjasama</li>
                     </ol>
                 </nav>
             </div>
@@ -403,14 +421,90 @@
     </div>
     <section class="section">
         <div class="row">
-            <div class="col-12">
+                <!-- // Basic Vertical form layout section end -->
+            </div>
+            <div class="col-12 col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Coming Soon!</h5>
-                    </div>
-                    <div class="card-body">
-                        If you want to contribute. Check out this <a href="https://github.com/zuramai/mazer"
-                            target="_blank">template repository</a>.
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Isilah Form Kerjasama dibawah ini Dengan Benar!</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form form-vertical" action="database/upload.php" method="POST" enctype="multipart/form-data">
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="first-name-icon">Nama</label>
+                                                            <div class="position-relative">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Jika tidak ada silahkan login terlebih dahulu"
+                                                                    id="first-name-icon"
+                                                                    name="input-user-name"
+                                                                    value = "<?php $databaseAction->GetUser($koneksi)?>">
+                                                                <div class="form-control-icon">
+                                                                    <i class="bi bi-person"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 mb">
+                                                        <div class="card-content">
+                                                            <label for="email-id-icon">Proposal Bisnis</label>
+                                                            <p style="font-weight:500;">Silahkan masukkan proposal bisnis anda (format pdf)</p>
+                                                            <!-- <div class="card-body pt-1"> -->
+                                                                <input type="file" name="input-proposal-bisnis" id="input-file" accept="application/pdf"  >
+                                                            <!-- </div> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 mb">
+                                                        <div class="card-content">
+                                                            <label for="email-id-icon">Cash Flow</label>
+                                                            <p style="font-weight:500;">Silahkan masukkan cash flow dari bisnis anda (format pdf)</p>
+                                                            <!-- <div class="card-body pt-1"> -->
+                                                                <input type="file" name="input-cash-flow" accept="application/pdf">                                                             
+                                                            <!-- </div> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group has-icon-left">
+                                                            <label for="first-name-icon">Rencana Kerjasama</label>
+                                                            <p style="font-weight:500;">Silahkan jelaskan rencana kerja sama anda dengan pusat bisnis UIN Malang</p>
+                                                            <div class="position-relative">
+                                                                <!-- <div class="card-body pt-1"> -->
+                                                                    <!-- <div id="summernote">Coba coba</div> -->
+                                                                    <div class="input-group">
+                                                                        <textarea name="textarea-rencana-kerjasama" class="form-control" rows="10" style="height:100%;" ></textarea>
+                                                                    <!-- </div> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-12"> -->
+                                                        <!-- <div class='form-check'> -->
+                                                            <!-- <div class="checkbox mt-2"> -->
+                                                                <!-- <input type="checkbox" id="remember-me-v" -->
+                                                                    <!-- class='form-check-input' checked> -->
+                                                                <!-- <label for="remember-me-v">Remember Me</label> -->
+                                                            <!-- </div> -->
+                                                        <!-- </div> -->
+                                                    <!-- </div> -->
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="submit" name="btn-submit"
+                                                            class="btn btn-primary me-1 mb-1">Submit</button>
+                                                        <button type="reset"
+                                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -434,6 +528,33 @@
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     
+<!-- filepond validation -->
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+
+<!-- image editor -->
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<!-- toastify -->
+<script src="assets/vendors/toastify/toastify.js"></script>
+
+<!-- filepond -->
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/jquery/jquery.min.js"></script>
+    <script src="assets/vendors/summernote/summernote-lite.min.js"></script>
+
     <script src="assets/js/main.js"></script>
 </body>
 

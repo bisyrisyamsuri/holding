@@ -5195,7 +5195,6 @@ var Editor_Editor = /*#__PURE__*/function () {
     this.context.memo('help.fontName', this.lang.help.fontName); // native commands(with execCommand), generate function for execCommand
 
     var commands = ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', 'formatBlock', 'removeFormat', 'backColor'];
-    
 
     for (var idx = 0, len = commands.length; idx < len; idx++) {
       this[commands[idx]] = function (sCmd) {
@@ -9795,7 +9794,6 @@ external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summe
       link: [['link', ['linkDialogShow', 'unlink']]],
       table: [['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']], ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]],
       air: [['color', ['color']], ['font', ['bold', 'underline', 'clear']], ['para', ['ul', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['fullscreen', 'codeview']]]
-      
     },
     // air mode: inline editor
     airMode: false,
