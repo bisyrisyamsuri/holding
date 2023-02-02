@@ -3,8 +3,6 @@ if (isset($_POST['btn-submit'])) {
     $filePB = $_FILES['input-proposal-bisnis'];
     $fileCF = $_FILES['input-cash-flow'];
 
-    $projek_kerjasama = $_POST['textarea-rencana-kerjasama'];
-
     $filePBName = $_FILES['input-proposal-bisnis']['name'];
     $filePBTmpName = $_FILES['input-proposal-bisnis']['tmp_name'];
     $filePBSize = $_FILES['input-proposal-bisnis']['size'];
@@ -37,10 +35,6 @@ if (isset($_POST['btn-submit'])) {
                 move_uploaded_file($filePBTmpName, $filePBDestination);
                 move_uploaded_file($fileCFTmpName, $fileCFDestination);
                 
-                $id_user = $_SESSION['id_user'];
-
-                $sql = "INSERT INTO tb_userbisnisprofile (id_user, proposal_bisnis, cash_flow, pojek_kerjasama) VALUES ($id_user, $filePBDestination, $fileCFDestination, $projek_kerjasama)"; 
-
                 header('Location: ../ui-file-uploader.php?uploadSuccess');
 
             }else{
