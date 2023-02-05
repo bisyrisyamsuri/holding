@@ -14,7 +14,6 @@ require_once("auth.php");
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
-
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -22,8 +21,8 @@ require_once("auth.php");
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="marker/leaflet.awesome-markers/dist/leaflet.awesome-markers.css">
 
-    <!-- <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css"> -->
-    <!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" /> -->
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
 
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
@@ -175,7 +174,7 @@ require_once("auth.php");
                                         // marker9.bindPopup("<b>Fakultas Syariah!</b><br><img src='https://lh5.googleusercontent.com/p/AF1QipNljjoiJE6Ix1S0v9XowK5N19hDmbPaqDtB8PPY=w408-h272-k-no' width='200' height='150'/><br>Lihat Detail <a href='layout-default.html'>disini</a>");
                                         // marker10.bindPopup("<b>Fakultas Syariah!</b><br><img src='https://lh5.googleusercontent.com/p/AF1QipNljjoiJE6Ix1S0v9XowK5N19hDmbPaqDtB8PPY=w408-h272-k-no' width='200' height='150'/><br>Lihat Detail <a href='layout-default.html'>disini</a>");
 
-                                        Mengambil data dari file data.php menggunakan AJAX
+                                        // Mengambil data dari file data.php menggunakan AJAX
                                         var xhr = new XMLHttpRequest();
                                         xhr.open('GET', 'data-map.php', true);
                                         xhr.onreadystatechange = function () {

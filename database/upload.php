@@ -47,9 +47,6 @@ if (isset($_POST['btn-submit'])) {
                     header('Location: ../ui-file-uploader.php?uploadError');
 
                 }
-                
-                
-
             }else{
                 header('Location: ../ui-file-uploader.php?fileToBig');
             }
