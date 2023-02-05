@@ -1,12 +1,5 @@
 <?php
 require_once("auth.php");
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<?php
-require_once("auth.php");
 
 require "database/koneksi.php";
 function query($sql)
@@ -19,6 +12,13 @@ function query($sql)
     }
     return $data_hasil_query;
 }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<?php
+require_once("auth.php");
 ?>
 
 <!DOCTYPE html>
@@ -66,216 +66,13 @@ function query($sql)
                     </div>
                 </nav>
             </header>
-            <div class="page-content">
-                <section class="row">
-                    <div class="col-12 col-lg-9">
-                        <div class="row">
-                            <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-1 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon purple">
-                                                    <i class="iconly-boldProfile"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Kerjasama</h6>
-                                                <h6 class="font-extrabold mb-0">183.000</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-1 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon blue">
-                                                    <i class="iconly-boldDiscovery"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Layanan</h6>
-                                                <h6 class="font-extrabold mb-0">24</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-1 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon green">
-                                                    <i class="iconly-boldTicket"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Kategori</h6>
-                                                <h6 class="font-extrabold mb-0">4</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-1 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon red">
-                                                    <i class="iconly-boldPaper-Plus"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Kesepakatan</h6>
-                                                <h6 class="font-extrabold mb-0">3</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Pertumbuhan Total Per-Bulan</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="chart-profile-visit"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-xl-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Progress Per-Kategori</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-lg">
-                                                <tr>
-                                                    <td class="col-3">Halal Industri</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-info">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 60%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">60%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Service and Retail</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-success">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 35%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">30%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Property</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-danger">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 50%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">50%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-3">Medical Center</td>
-                                                    <td class="col-6">
-                                                        <div class="progress progress-primary">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 80%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-3 text-center">80%</td>
-                                                </tr>
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-3">
-                        <!-- <div class="card">
-                            <div class="card-body py-4 px-5">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar avatar-xl">
-                                        <img src="assets/images/faces/1.jpg" alt="Face 1">
-                                    </div>
-                                    <div class="ms-3 name">
-                                        <h5 class="font-bold">Admin Holding</h5>
-                                        <h6 class="text-muted mb-0">@uinmalang</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Butuh Approval</h4>
-                            </div>
-                            <div class="card-content pb-4">
-                                <div class="recent-message d-flex px-4 py-3">
-                                    <div class="avatar avatar-lg">
-                                        <img src="assets/images/faces/4.jpg">
-                                    </div>
-                                    <div class="name ms-4">
-                                        <h5 class="mb-1">Hank Schrader</h5>
-                                        <h6 class="text-muted mb-0">@johnducky</h6>
-                                    </div>
-                                </div>
-                                <div class="recent-message d-flex px-4 py-3">
-                                    <div class="avatar avatar-lg">
-                                        <img src="assets/images/faces/5.jpg">
-                                    </div>
-                                    <div class="name ms-4">
-                                        <h5 class="mb-1">Dean Winchester</h5>
-                                        <h6 class="text-muted mb-0">@imdean</h6>
-                                    </div>
-                                </div>
-                                <div class="recent-message d-flex px-4 py-3">
-                                    <div class="avatar avatar-lg">
-                                        <img src="assets/images/faces/1.jpg">
-                                    </div>
-                                    <div class="name ms-4">
-                                        <h5 class="mb-1">John Dodol</h5>
-                                        <h6 class="text-muted mb-0">@dodoljohn</h6>
-                                    </div>
-                                </div>
-                                <div class="px-4">
-                                    <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-                                        Approved</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Pembagian Per-Kategori</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart-visitors-profile"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
+            <?php
+            if ($_SESSION['role'] == 1) {
+                include("aside_index-admin.php");
+            } else {
+                include("aside_index-user.php");
+            }
+                ?>
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
