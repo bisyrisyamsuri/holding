@@ -69,8 +69,6 @@ require_once("auth.php");
                 </div>
                 <section class="section">
                     <div class="row">
-
-
                         <!-- // Basic Vertical form layout section end -->
                     </div>
                     <div class="col-12 col-md-12">
