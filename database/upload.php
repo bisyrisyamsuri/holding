@@ -41,7 +41,14 @@ if (isset($_POST['btn-submit'])) {
 
                 $sql = "INSERT INTO tb_userbisnisprofile (id_user, proposal_bisnis, cash_flow, pojek_kerjasama) VALUES ($id_user, $filePBDestination, $fileCFDestination, $projek_kerjasama)"; 
 
-                header('Location: ../ui-file-uploader.php?uploadSuccess');
+                if (mysqli_query($conn, $sql)) {
+                    header('Location: ../ui-file-uploader.php?uploadSuccess');
+                } else {
+                    header('Location: ../ui-file-uploader.php?uploadError');
+
+                }
+                
+                
 
             }else{
                 header('Location: ../ui-file-uploader.php?fileToBig');
