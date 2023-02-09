@@ -1,5 +1,5 @@
 <?php
-require_once("database/koneksi.php");
+require_once("database/config.php");
 
 $message = '';
 session_start();

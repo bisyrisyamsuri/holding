@@ -53,6 +53,8 @@ if (isset($_POST['Login'])) {
 
                     $_SESSION['id_user'] = $row['id_user'];
 
+                    $_SESSION['email'] = $row['email'];
+
                     $_SESSION['session_id'] = $user_session_id;
 
                     $_SESSION['role'] = $row['role'];

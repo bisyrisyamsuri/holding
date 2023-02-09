@@ -16,7 +16,7 @@ require_once("auth.php");
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <!-- icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="marker/leaflet.awesome-markers/dist/leaflet.awesome-markers.css">
@@ -94,25 +94,25 @@ require_once("auth.php");
                                         });
 
                                         var ServiceIcon = L.AwesomeMarkers.icon({
-                                            icon: 'building',
+                                            icon: 'handshake',
                                             prefix: 'fa',
                                             markerColor: 'red'
                                         });
 
                                         var PropertyIcon = L.AwesomeMarkers.icon({
-                                            icon: 'certificate',
+                                            icon: 'building',
                                             prefix: 'fa',
                                             markerColor: 'yellow'
                                         });
 
                                         var MedicIcon = L.AwesomeMarkers.icon({
-                                            icon: 'certificate',
+                                            icon: 'staff-snake',
                                             prefix: 'fa',
                                             markerColor: 'purple'
                                         });
 
                                         var AkademiIcon = L.AwesomeMarkers.icon({
-                                            icon: 'certificate',
+                                            icon: 'graduation-cap',
                                             prefix: 'fa',
                                             markerColor: 'orange'
                                         });
@@ -183,17 +183,17 @@ require_once("auth.php");
                                                 for (var i = 0; i < data.length; i++) {
                                                     if (data[i].id_kategori == "1") {
                                                         // var marker = L.marker([data[i].lat, data[i].lon], { icon: L.AwesomeMarkers.icon({ icon: 'home', prefix: 'fas', markerColor: 'red' }) }).addTo(ma p);
-                                                        var marker  = L.marker([data[i].lat, data[i].lon], { icon: HalalIcon}).addTo(map);
-                                                    }else if(data[i].id_kategori == "2"){
-                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: ServiceIcon}).addTo(map);
-                                                    }else if(data[i].id_kategori == "3"){
-                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: PropertyIcon}).addTo(map);
-                                                    }else if(data[i].id_kategori == "4"){
-                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: MedicIcon}).addTo(map);
-                                                    }else if(data[i].id_kategori == "5"){
-                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: AkademiIcon}).addTo(map);
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: HalalIcon }).addTo(map);
+                                                    } else if (data[i].id_kategori == "2") {
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: ServiceIcon }).addTo(map);
+                                                    } else if (data[i].id_kategori == "3") {
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: PropertyIcon }).addTo(map);
+                                                    } else if (data[i].id_kategori == "4") {
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: MedicIcon }).addTo(map);
+                                                    } else if (data[i].id_kategori == "5") {
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: AkademiIcon }).addTo(map);
                                                     }
-                                                    else{
+                                                    else {
                                                         var marker = L.marker([data[i].lat, data[i].lon]).addTo(map);
                                                     }
 
@@ -207,7 +207,7 @@ require_once("auth.php");
                                                     //         var marker = L.marker([data[i].lat, data[i].lon], { icon: ServiceIcon }).addTo(map);
                                                     //         break;
                                                     //     default:
-                                                        // var marker = L.marker([data[i].lat, data[i].lon]).addTo(map);
+                                                    // var marker = L.marker([data[i].lat, data[i].lon]).addTo(map);
                                                     //         break;
                                                     // }
                                                     // marker.bindPopup("<img src='" + data[i].url_gambar + "' style='width:100px;'/> <br> <b>" + data[i].jenis_layanan + "</b> <br>Lihat Detail <a href='layout-default.html'>disini</a>").openPopup();

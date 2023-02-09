@@ -16,22 +16,35 @@
             <div class="sidebar-menu">
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
-                    
-                    <li class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/web_holding/index.php') echo 'sidebar-item active'; ?>">
+
+                    <li
+                        class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/holding/index.php') echo 'sidebar-item active'; ?>">
                         <a href="index.php" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/web_holding/ui-file-uploader.php') echo 'sidebar-item active'; ?>">
+                    <!-- <li class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/holding/ui-file-uploader.php') echo 'sidebar-item active'; ?>">
+                        <a href="ui-file-uploader.php" class="sidebar-link">
+                            <i class="bi bi-cloud-arrow-up-fill"></i>
+                            <span>Form Kerjasama</span>
+                        </a>
+                    </li> -->
+
+                    <?php
+                        if($_SESSION['role'] == 2)echo'
+
+                    <li class="sidebar-item">
                         <a href="ui-file-uploader.php" class="sidebar-link">
                             <i class="bi bi-cloud-arrow-up-fill"></i>
                             <span>Form Kerjasama</span>
                         </a>
                     </li>
+                    <?php';?>
 
-                    <li class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/web_holding/ui-map-google-map.php') echo 'sidebar-item active'; ?>">
+                    <li
+                        class="sidebar-item <?php if ($_SERVER['PHP_SELF'] == '/holding/ui-map-google-map.php') echo 'sidebar-item active'; ?>">
                         <a href="ui-map-google-map.php" class="sidebar-link">
                             <i class="bi bi-map-fill"></i>
                             <span>Maps</span>
@@ -40,25 +53,30 @@
 
                     <?php
                         if($_SESSION['role'] == 1)echo'
-                    
-                    
-                    <li class="sidebar-item has-sub">
-                        <a href="#" class="sidebar-link">
-                            <i class="bi bi-person-badge-fill"></i>
-                            <span>Kelola</span>
-                        </a>
-                        <ul class="submenu">
-                            <li class="submenu-item">
-                                <a href="#">Logout</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="auth-register.php">Register</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="auth-forgot-password.php">Forgot Password</a>
-                            </li>
-                        </ul>
-                    </li>
+
+                        <li class="sidebar-item">
+                            <a href="data-disetujui.php" class="sidebar-link">
+                                <i class="bi bi-person-check-fill"></i>
+                                <span>Data Disetujui</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-person-badge-fill"></i>
+                                <span>Kelola</span>
+                            </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="tambah_kategori.php">Tambah Kategori</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="tambah_layanan.php">Tambah Layanan</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="user_approval.php">Butuh Approval</a>
+                                </li>
+                            </ul>
+                        </li>
                     <?php';?>
                 </ul>
             </div>

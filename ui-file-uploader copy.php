@@ -5,7 +5,7 @@
     require 'database/database-action.php';
 
     $userid = $_SESSION["id_user"];
-    // echo $userid;
+    echo $userid;
     $sql = mysqli_query($conn,"SELECT * FROM tb_user WHERE id_user = '$userid'");
 
 

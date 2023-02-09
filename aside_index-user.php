@@ -191,7 +191,7 @@
 
                                             <div class="progress progress-danger" style="height: 38px;">
                                                 <div class="progress-bar" role="progressbar"
-                                                    style="width:<?php echo $dc['percentage'] ?>%" aria-valuenow="0"
+                                                    style="width:<?php echo $dc['percentage'] ?>" aria-valuenow="0"
                                                     aria-valuemin="0" aria-valuemax="100">
                                                     <span class="progress-bar-label align-items-center"
                                                         style="font-size: 16px; text-shadow: 0 0 1px #000;">Rp <?php echo number_format($dc['nilai_kerjasama'], 0, ",", "."); ?></span>

@@ -29,7 +29,7 @@ if (isset($_POST['btn-submit'])) {
 
     if (in_array($filePBActualExt, $allowed) && in_array($fileCFActualExt, $allowed)) {
         if ($filePBError == 0 && $fileCFError == 0) {
-            if ($filePBSize <= 10000000 && $fileCFSize <= 10000000) {
+            if ($filePBSize <= 100000 && $fileCFSize <= 100000) {
                 $filePBNewName = uniqid('', true).".".$filePBActualExt;
                 $fileCFNewName = uniqid('', true).".".$fileCFActualExt;
 
