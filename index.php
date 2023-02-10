@@ -2,6 +2,7 @@
 require_once("auth.php");
 
 require "database/koneksi.php";
+
 function query($sql)
 {
     global $conn;
@@ -12,6 +13,7 @@ function query($sql)
     }
     return $data_hasil_query;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +43,7 @@ require_once("auth.php");
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style type="text/css">
         #map {
             height: 400px;
@@ -94,6 +97,7 @@ require_once("auth.php");
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/session.js"></script>
+    
 
 </body>
 

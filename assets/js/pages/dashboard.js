@@ -1,48 +1,82 @@
-var optionsProfileVisit = {
-	annotations: {
-		position: 'back'
-	},
-	dataLabels: {
-		enabled:false
-	},
-	chart: {
-		type: 'bar',
-		height: 300
-	},
-	fill: {
-		opacity:1
-	},
-	plotOptions: {
-	},
-	series: [{
-		name: 'sales',
-		data: [9,20,30,20,10,20,30,20,10,20,30,20]
-	}],
-	colors: '#435ebe',
-	xaxis: {
-		categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
-	},
-}
-let optionsVisitorsProfile  = {
-	series: [70, 30],
-	labels: ['Male', 'Female'],
-	colors: ['#435ebe','#55c6e8'],
-	chart: {
-		type: 'donut',
-		width: '100%',
-		height:'350px'
-	},
-	legend: {
-		position: 'bottom'
-	},
-	plotOptions: {
-		pie: {
-			donut: {
-				size: '30%'
-			}
-		}
-	}
-}
+$.getScript("../holding/database/koneksi.php", function () {
+  $.ajax({
+    type: "GET",
+    url: "http://localhost/holding/database/data.php",
+    success: function (response) {
+      var data = JSON.parse(response);
+      
+
+      var months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      var monthNames = data.bulan.map(function (monthNumber) {
+        return months[monthNumber - 1];
+      });
+	  
+      var optionsProfileVisit = {
+        annotations: {
+          position: "back",
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        chart: {
+          type: "bar",
+          height: 300,
+        },
+        fill: {
+          opacity: 1,
+        },
+        plotOptions: {},
+        series: [
+          {
+            name: "sales",
+            data: data.angka.map(function(angka) {
+              return angka.toLocaleString();
+            }),
+          },
+        ],
+        colors: "#435ebe",
+        xaxis: {
+          categories: monthNames,
+        },
+      };
+      let optionsVisitorsProfile = {
+        series: [25, 35, 20, 20],
+        labels: [
+          "Halal Industry",
+          "Service and Retail",
+          "Property",
+          "Medical Center",
+        ],
+        colors: ["#0dcaf0", "#198754", "#dc3545", "#435ebe"],
+        chart: {
+          type: "donut",
+          width: "100%",
+          height: "350px",
+        },
+        legend: {
+          position: "bottom",
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              size: "30%",
+            },
+          },
+        },
+      };
 
       var optionsEurope = {
         series: [
@@ -137,8 +171,11 @@ let optionsVisitorsProfile  = {
         optionsIndonesia
       );
 
-chartIndonesia.render();
-chartAmerica.render();
-chartEurope.render();
-chartProfileVisit.render();
-chartVisitorsProfile.render()
+      chartIndonesia.render();
+      chartAmerica.render();
+      chartEurope.render();
+      chartProfileVisit.render();
+      chartVisitorsProfile.render();
+    },
+  });
+});

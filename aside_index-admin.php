@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" onload=getDataChart()>
+                <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -136,7 +136,6 @@
                                         JOIN tb_kategoribisnis
                                         ON tb_jenislayanan.id_kategori = tb_kategoribisnis.id_kategori
                                         GROUP BY tb_kategoribisnis.kategori_bisnis";
-
                             $data_chart = query($sql); foreach ($data_chart as $dc):
                                 ?>
                                 <div class="card-header">
@@ -201,7 +200,7 @@
                                             </div>
                                             <div class="col-6 mt-2">
                                                 <h6 class="mb-0">
-                                                    <?php echo $dc['percentage'] ?>%
+                                                    <?php echo $dc['percentage'] ?>
                                                 </h6>
                                             </div>
 
@@ -236,45 +235,46 @@
                         <h4>Butuh Approval</h4>
                     </div>
                     <div class="card-content pb-4">
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="assets/images/faces/4.jpg">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Hank Schrader</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="assets/images/faces/5.jpg">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Dean Winchester</h5>
-                                <h6 class="text-muted mb-0">@imdean</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="assets/images/faces/1.jpg">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">John Dodol</h5>
-                                <h6 class="text-muted mb-0">@dodoljohn</h6>
-                            </div>
-                        </div>
+                        <table class="table table-striped" id="table1">
+                            <thead>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Username</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $bisnis = "SELECT * , tb_user.username FROM tb_userbisnisprofile JOIN tb_user ON tb_user.id_user = tb_userbisnisprofile.id_user WHERE tindakan = 'Belum Disetujui' LIMIT 4";
+                                $data = mysqli_query($conn, $bisnis);
+                                $nomor_urut = 1;
+                                ?>
+                                <tr>
+                                    <?php foreach ($data as $row):
+                                        ?>
+                                    <tr>
+                                        <td>
+
+                                            <?php echo $nomor_urut++ ?>
+
+                                        </td>
+                                        <td>
+
+
+                                            <?php echo $row['username'] ?>
+
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    endforeach
+                                    ?>
+                                </tr>
+                            </tbody>
+                        </table>
                         <div class="px-4">
-                            <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-                                Approved</button>
+                            <a type="button" href="user_approval.php"
+                                class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
+                                Approved</a>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Pembagian Per-Kategori</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="chart-visitors-profile"></div>
                     </div>
                 </div>
             </div>

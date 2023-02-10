@@ -1,18 +1,18 @@
 <?php
-    require 'database/koneksi.php';
-    require_once 'auth.php'; 
-    require 'database/db.php';
-    require 'database/database-action.php';
+require 'database/koneksi.php';
+require_once 'auth.php';
+require 'database/db.php';
+require 'database/database-action.php';
 
-    $userid = $_SESSION["id_user"];
-    // echo $userid;
-    $sql = mysqli_query($conn,"SELECT * FROM tb_user WHERE id_user = '$userid'");
+$userid = $_SESSION["id_user"];
+// echo $userid;
+$sql = mysqli_query($conn, "SELECT * FROM tb_user WHERE id_user = '$userid'");
 
 
-    while ($row = mysqli_fetch_assoc($sql)) {
-        $username = $row["username"];
+while ($row = mysqli_fetch_assoc($sql)) {
+    $username = $row["username"];
 
-    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,15 +22,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Kerjasama</title>
-    
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/summernote/summernote-lite.min.css">
-    
-<link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
-<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -38,14 +39,14 @@
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
 
-<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
-<!--Font Awesome (added because you use icons in your prepend/append)-->
+    <!--Font Awesome (added because you use icons in your prepend/append)-->
 </head>
 
 <body>
-<div id="app">
+    <div id="app">
         <div id="sidebar" class="active">
             <?php include 'layout-sidebar.html'; ?>
         </div>
@@ -61,107 +62,116 @@
                     </div>
                 </nav>
             </header>
-            
-<div class="page-heading">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Form Kerjasama</h3>
-                <p class="text-subtitle text-muted">Merupakan form dari kerjasama pusat bisnis UIN Malang</p>
-            </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Form Kerjasama</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <section class="section">
-        <div class="row">
-                <!-- // Basic Vertical form layout section end -->
-            </div>
-            <div class="col-12 col-md-12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Isilah Form Kerjasama dibawah ini Dengan Benar!</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <form class="form form-vertical" action="database/upload.php" method="POST" enctype="multipart/form-data">
-                                            <div class="form-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-group has-icon-left">
-                                                            <label for="first-name-icon">Nama</label>
-                                                            <div class="position-relative">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Jika tidak ada silahkan login terlebih dahulu"
-                                                                    id="first-name-icon"
-                                                                    name="input-user-name"
-                                                                    value = "<?php echo $username?>"
-                                                                    readonly>
-                                                                <div class="form-control-icon">
-                                                                    <i class="bi bi-person"></i>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Form Kerjasama</h3>
+                            <p class="text-subtitle text-muted">Merupakan form dari kerjasama pusat bisnis UIN Malang
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Form Kerjasama</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <section class="section">
+                    <div class="row">
+                        <!-- // Basic Vertical form layout section end -->
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Isilah Form Kerjasama dibawah ini Dengan Benar!</h4>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <form class="form form-vertical" action="database/upload.php"
+                                                    method="POST" enctype="multipart/form-data">
+                                                    <div class="form-body">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label for="first-name-icon">Nama</label>
+                                                                    <div class="position-relative">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Jika tidak ada silahkan login terlebih dahulu"
+                                                                            id="first-name-icon" name="input-user-name"
+                                                                            value="<?php echo $username ?>" readonly>
+                                                                        <div class="form-control-icon">
+                                                                            <i class="bi bi-person"></i>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 mb">
-                                                        <div class="card-content">
-                                                            <label for="email-id-icon">Proposal Bisnis</label>
-                                                            <p style="font-weight:500;">Silahkan masukkan proposal bisnis anda (format pdf)</p>
-                                                            <!-- <div class="card-body pt-1"> -->
-                                                                <input type="file" name="input-proposal-bisnis" id="input-file" accept="application/pdf"  >
-                                                            <!-- </div> -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 mb">
-                                                        <div class="card-content">
-                                                            <label for="email-id-icon">Cash Flow</label>
-                                                            <p style="font-weight:500;">Silahkan masukkan cash flow dari bisnis anda (format pdf)</p>
-                                                            <!-- <div class="card-body pt-1"> -->
-                                                                <input type="file" name="input-cash-flow" accept="application/pdf">                                                             
-                                                            <!-- </div> -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group has-icon-left">
-                                                            <label for="first-name-icon">Rencana Kerjasama</label>
-                                                            <p style="font-weight:500;">Silahkan jelaskan rencana kerja sama anda dengan pusat bisnis UIN Malang</p>
-                                                            <div class="position-relative">
-                                                                <!-- <div class="card-body pt-1"> -->
-                                                                    <!-- <div id="summernote">Coba coba</div> -->
-                                                                    <div class="input-group">
-                                                                        <textarea name="textarea-rencana-kerjasama" class="form-control" rows="10" style="height:100%;" ></textarea>
+                                                            <div class="col-12 mb">
+                                                                <div class="card-content">
+                                                                    <label for="email-id-icon">Proposal Bisnis</label>
+                                                                    <p style="font-weight:500;">Silahkan masukkan
+                                                                        proposal bisnis anda (format pdf)</p>
+                                                                    <!-- <div class="card-body pt-1"> -->
+                                                                    <input type="file" name="input-proposal-bisnis"
+                                                                        id="input-file" accept="application/pdf">
                                                                     <!-- </div> -->
                                                                 </div>
                                                             </div>
+                                                            <div class="col-12 mb">
+                                                                <div class="card-content">
+                                                                    <label for="email-id-icon">Cash Flow</label>
+                                                                    <p style="font-weight:500;">Silahkan masukkan cash
+                                                                        flow dari bisnis anda (format pdf)</p>
+                                                                    <!-- <div class="card-body pt-1"> -->
+                                                                    <input type="file" name="input-cash-flow"
+                                                                        accept="application/pdf">
+                                                                    <!-- </div> -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group has-icon-left">
+                                                                    <label for="first-name-icon">Rencana
+                                                                        Kerjasama</label>
+                                                                    <p style="font-weight:500;">Silahkan jelaskan
+                                                                        rencana kerja sama anda dengan pusat bisnis UIN
+                                                                        Malang</p>
+                                                                    <div class="position-relative">
+                                                                        <!-- <div class="card-body pt-1"> -->
+                                                                        <!-- <div id="summernote">Coba coba</div> -->
+                                                                        <div class="input-group">
+                                                                            <textarea name="textarea-rencana-kerjasama"
+                                                                                class="form-control" rows="10"
+                                                                                style="height:100%;"></textarea>
+                                                                            <!-- </div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 d-flex justify-content-end">
+                                                                <button type="submit" name="btn-submit"
+                                                                    class="btn btn-primary me-1 mb-1">Submit</button>
+                                                                <button type="reset"
+                                                                    class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 d-flex justify-content-end">
-                                                        <button type="submit" name="btn-submit"
-                                                            class="btn btn-primary me-1 mb-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
-        </div>
-    </section>
+            </section>
 
 
             <footer>
@@ -179,29 +189,34 @@
     </div>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    
-<!-- filepond validation -->
-<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 
-<!-- image editor -->
-<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- filepond validation -->
+    <script
+        src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script
+        src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <!-- image editor -->
+    <script
+        src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-filter/dist/filepond-plugin-image-filter.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-<!-- toastify -->
-<script src="assets/vendors/toastify/toastify.js"></script>
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
-<!-- filepond -->
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-<script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <!-- toastify -->
+    <script src="assets/vendors/toastify/toastify.js"></script>
+
+    <!-- filepond -->
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
     <script src="assets/vendors/jquery/jquery.min.js"></script>
