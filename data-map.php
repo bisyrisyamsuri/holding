@@ -1,5 +1,5 @@
 <?php
-require_once("config.php");
+require_once("database/config.php");
 
 // Ambil data lat, lon, url_gambar, dan nama_lokasi dari tabel
 $stmt = $conn->prepare("SELECT * FROM tb_jenislayanan");

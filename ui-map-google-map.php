@@ -14,9 +14,16 @@ require_once("auth.php");
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
-
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="marker/leaflet.awesome-markers/dist/leaflet.awesome-markers.css">
+
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
@@ -32,6 +39,7 @@ require_once("auth.php");
 </head>
 
 <body>
+
     <div id="app">
         <div id="sidebar" class="active">
             <?php include 'layout-sidebar.html'; ?>
@@ -75,31 +83,38 @@ require_once("auth.php");
                             <div class="card">
                                 <div id="map" class="card-header">
                                     <script src="https://cdn.leafletjs.com/leaflet/1.6.0/leaflet.js"></script>
+                                    <script
+                                        src="marker/leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
                                     <script>
 
-                                        var HalalIcon = L.icon({
-                                            iconUrl: 'path/to/icon1.png',
-                                            iconSize: [50, 50],
+                                        var HalalIcon = L.AwesomeMarkers.icon({
+                                            icon: 'certificate',
+                                            prefix: 'fa',
+                                            markerColor: 'green'
                                         });
 
-                                        var SeviceIcon = L.icon({
-                                            iconUrl: 'path/to/icon2.png',
-                                            iconSize: [50, 50],
+                                        var ServiceIcon = L.AwesomeMarkers.icon({
+                                            icon: 'handshake',
+                                            prefix: 'fa',
+                                            markerColor: 'red'
                                         });
 
-                                        var PropertyIcon = L.icon({
-                                            iconUrl: 'path/to/icon1.png',
-                                            iconSize: [50, 50],
+                                        var PropertyIcon = L.AwesomeMarkers.icon({
+                                            icon: 'building',
+                                            prefix: 'fa',
+                                            markerColor: 'yellow'
                                         });
 
-                                        var MedicIcon = L.icon({
-                                            iconUrl: 'path/to/icon2.png',
-                                            iconSize: [50, 50],
+                                        var MedicIcon = L.AwesomeMarkers.icon({
+                                            icon: 'staff-snake',
+                                            prefix: 'fa',
+                                            markerColor: 'purple'
                                         });
 
-                                        var AkademiIcon = L.icon({
-                                            iconUrl: 'path/to/icon2.png',
-                                            iconSize: [50, 50],
+                                        var AkademiIcon = L.AwesomeMarkers.icon({
+                                            icon: 'graduation-cap',
+                                            prefix: 'fa',
+                                            markerColor: 'orange'
                                         });
 
                                         let locations = [
@@ -159,14 +174,6 @@ require_once("auth.php");
                                         // marker9.bindPopup("<b>Fakultas Syariah!</b><br><img src='https://lh5.googleusercontent.com/p/AF1QipNljjoiJE6Ix1S0v9XowK5N19hDmbPaqDtB8PPY=w408-h272-k-no' width='200' height='150'/><br>Lihat Detail <a href='layout-default.html'>disini</a>");
                                         // marker10.bindPopup("<b>Fakultas Syariah!</b><br><img src='https://lh5.googleusercontent.com/p/AF1QipNljjoiJE6Ix1S0v9XowK5N19hDmbPaqDtB8PPY=w408-h272-k-no' width='200' height='150'/><br>Lihat Detail <a href='layout-default.html'>disini</a>");
 
-                                        //  
-                                        //     foreach ($result as $row) {
-                                        //         echo 'var marker = L.marker([' . $row['lat'] . ', ' . $row['lon'] . ']).addTo(map);';
-                                        //         // echo 'marker.bindPopup("<img src=\'' . $row['url_gambar'] . '\' style=\'width=200 height=150;\'/> <br> <b>' . $row['nama_lokasi'] . '</b>").openPopup();';
-                                        //         echo 'marker.bindPopup("<img src=assets\images\faces\'1.jpg\' style=\'width=200 height=150;\'/> <br> <b>' . $row['nama_lokasi'] . '</b>").openPopup();';
-                                        //     }
-                                        // 
-
                                         // Mengambil data dari file data.php menggunakan AJAX
                                         var xhr = new XMLHttpRequest();
                                         xhr.open('GET', 'data-map.php', true);
@@ -174,8 +181,36 @@ require_once("auth.php");
                                             if (xhr.readyState === 4 && xhr.status === 200) {
                                                 var data = JSON.parse(xhr.responseText);
                                                 for (var i = 0; i < data.length; i++) {
-                                                    var marker = L.marker([data[i].lat, data[i].lon]).addTo(map);
-                                                    marker.bindPopup("<img src='" + data[i].url_gambar + "' style='width:100px;'/> <br> <b>" + data[i].jenis_layanan + "</b>").openPopup();
+                                                    if (data[i].id_kategori == "1") {
+                                                        // var marker = L.marker([data[i].lat, data[i].lon], { icon: L.AwesomeMarkers.icon({ icon: 'home', prefix: 'fas', markerColor: 'red' }) }).addTo(ma p);
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: HalalIcon }).addTo(map);
+                                                    } else if (data[i].id_kategori == "2") {
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: ServiceIcon }).addTo(map);
+                                                    } else if (data[i].id_kategori == "3") {
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: PropertyIcon }).addTo(map);
+                                                    } else if (data[i].id_kategori == "4") {
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: MedicIcon }).addTo(map);
+                                                    } else if (data[i].id_kategori == "5") {
+                                                        var marker = L.marker([data[i].lat, data[i].lon], { icon: AkademiIcon }).addTo(map);
+                                                    }
+                                                    else {
+                                                        var marker = L.marker([data[i].lat, data[i].lon]).addTo(map);
+                                                    }
+
+                                                    // var kategori = data[i].id_kategori;
+                                                    // var marker;
+                                                    // switch (kategori) {
+                                                    //     case 1:
+                                                    //         var marker = L.marker([data[i].lat, data[i].lon], { icon: HalalIcon }).addTo(map);
+                                                    //         break;
+                                                    //     case 2:
+                                                    //         var marker = L.marker([data[i].lat, data[i].lon], { icon: ServiceIcon }).addTo(map);
+                                                    //         break;
+                                                    //     default:
+                                                    // var marker = L.marker([data[i].lat, data[i].lon]).addTo(map);
+                                                    //         break;
+                                                    // }
+                                                    // marker.bindPopup("<img src='" + data[i].url_gambar + "' style='width:100px;'/> <br> <b>" + data[i].jenis_layanan + "</b> <br>Lihat Detail <a href='layout-default.html'>disini</a>").openPopup();
                                                 }
                                             }
                                         }

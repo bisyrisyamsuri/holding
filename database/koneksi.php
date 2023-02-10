@@ -3,7 +3,7 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$dbname = "holding";
+$dbname = "holding_database";
 
 $conn = mysqli_connect($host, $username, $password, $dbname);
 

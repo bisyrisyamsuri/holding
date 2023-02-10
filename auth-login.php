@@ -1,5 +1,5 @@
 <?php
-require_once("config.php");
+require_once("database/config.php");
 
 $message = "";
 
@@ -52,6 +52,8 @@ if (isset($_POST['Login'])) {
                     $conn->query($query);
 
                     $_SESSION['id_user'] = $row['id_user'];
+
+                    $_SESSION['email'] = $row['email'];
 
                     $_SESSION['session_id'] = $user_session_id;
 

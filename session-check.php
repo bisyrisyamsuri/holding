@@ -1,6 +1,6 @@
 <?php
 //check_login.php
-include 'config.php';
+include 'database/koneksi.php';
 
 session_start();
 $query = "

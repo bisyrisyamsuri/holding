@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$database = "holding";
+$database = "holding_database";
 $koneksi = mysqli_connect($host, $user, $pass, $database);
 
 if (!$koneksi) {
