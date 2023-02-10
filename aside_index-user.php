@@ -1,16 +1,3 @@
-<?php
-
-function query($sql)
-{
-    global $conn;
-    $hasil_query = mysqli_query($conn, $sql);
-    $data_hasil_query = array();
-    while ($record_hasil_query = mysqli_fetch_assoc($hasil_query)) {
-        $data_hasil_query[] = $record_hasil_query;
-    }
-    return $data_hasil_query;
-}
-?>
 
 <aside>
     <div class="page-content">
