@@ -2,13 +2,11 @@
 require_once('koneksi.php');
 
 // Data yang akan ditambahkan
-$kategori = $_POST["kategori"];
-$target = $_POST["target"];
+$id = $_GET['id_kategori'];
 
 
 // Query untuk menambahkan data
-$sql = "INSERT INTO tb_kategoribisnis (kategori_bisnis, target_capaian)
-VALUES ('$kategori', '$target')";
+$sql = "DELETE FROM tb_kategoribisnis WHERE id_kategori=$id";
 
 // Menjalankan query
 if (mysqli_query($conn, $sql)) {

@@ -58,6 +58,7 @@ require_once("auth.php");
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="data-kategori.php">Data Kategori</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Tambah Kategori</li>
                                     </ol>
                                 </nav>

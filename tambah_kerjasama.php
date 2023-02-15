@@ -1,11 +1,5 @@
 <?php
 require_once("auth.php");
-require_once('database/koneksi.php');
-$id_user = $_GET['id_bisnis'];
-$sql = "SELECT *, tb_user.username, tb_jenislayanan.jenis_layanan, tb_jeniskerjasama.keterangan, tb_userbisnisprofile.cash_flow, tb_userbisnisprofile.proposal_bisnis FROM tb_bisnis JOIN tb_user ON tb_user.id_user=tb_bisnis.id_user JOIN tb_jenislayanan ON tb_bisnis.id_jenispelayanan=tb_jenislayanan.id_layanan JOIN tb_jeniskerjasama ON tb_bisnis.jenis_kerjasama=tb_jeniskerjasama.id_kerjasama JOIN tb_userbisnisprofile ON tb_bisnis.id_user=tb_userbisnisprofile.id_user WHERE id_bisnis= $id_user";
-$data = mysqli_query($conn, $sql);
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,24 +7,22 @@ $data = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Pengajuan</title>
+    <title>Tambah Kerjasama</title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/summernote/summernote-lite.min.css">
     
-    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
-    
     <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
-
 
 <!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
@@ -56,63 +48,71 @@ $data = mysqli_query($conn, $sql);
                 </nav>
             </header>
             
-            <div class="page-heading">
-                <div class="page-title">
-                    <div class="row">
-                        <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Data Detail Disetujui</h3>                            
-                        </div>
-                        <div class="col-12 col-md-6 order-md-2 order-first">
-                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                                    <li class="breadcrumb-item"> <a href="data-disetujui.php">Data Disetujui</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Detail Disetujui</li>
-                                </ol>
-                            </nav>
+                <div class="page-heading">
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <h3>Tambah Kerjasama</h3>
+                            </div>
+                            <div class="col-12 col-md-6 order-md-2 order-first">
+                                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="data-kerjasama.php">Data Kerjasama</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Tambah Kerjasama</li>
+                                    </ol>
+                                </nav>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <section class="section">
-                <?php
-                while ($bis = mysqli_fetch_array($data) ){
-                    
-                ?>
-                    <div class="card">
-                    <img src="assets/images/bg/setuju.png" class="position-absolute end-0" style="width: 300px; margin-top:100px; margin-right:100px;" alt="Image">
-                        <div class="card-header">
-                            <h4 class="card-title">Username: <?php echo $bis['username']?></h4>
+                    <div class="row">
+                                        
+                                    
+                            <!-- // Basic Vertical form layout section end -->
                         </div>
-                        <div class="card-body">
-                            <h1 class="card-title">Jenis Pelayanan Terpilih: </h1>
-                            <span style="font-size:20px;"><?=$bis['jenis_layanan']?></span>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title">Jenis Kerjasama Terpilih: </h1>
-                            <span style="font-size:20px;"><?=$bis['keterangan']?></span>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title">Nilai Kerjasama: </h1>
-                            <span style="font-size:20px;"><?=$bis['nilai_kerjasama']?></span>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title">Tanggal Disetujui</h1>
-                            <span style="font-size:20px;"><?= $bis['date']?></span>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title">Proposal Bisnis</h1>
-                            <object data="database/<?php echo $bis['proposal_bisnis']?>" width="100%" height="500px" 
-                                style="border-radius:10px; box-shadow: 1px 3px 10px #85CDFD;"></object>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title">Cash Flow</h1>
-                            <object data="database/<?php echo $bis['cash_flow']?>" width="100%" height="500px" 
-                                style="border-radius:10px; box-shadow: 1px 3px 10px #85CDFD;"></object>
+                        <div class="col-12 col-md-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="card">
+                                            
+                                            <div class="card-content">
+                                                <div class="card-body">
+                                                    <form action="database/insert_kerjasama.php" method="post" class="form form-vertical">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="form-group has-icon-left">
+                                                                        <label for="first-name-icon">Jenis Kerjasama</label>
+                                                                        <div class="position-relative">
+                                                                            <input type="text" name="kerjasama" class="form-control"
+                                                                                placeholder="Masukan Nama Jenis Kerjasama"
+                                                                                id="first-name-icon">
+                                                                            <div class="form-control-icon">
+                                                                                <i class="bi bi-heart"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 d-flex justify-content-end">
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary me-1 mb-1">Submit</button>
+                                                                    <button type="reset"
+                                                                        class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <?php
-                    }
-                ?>
                 </section>
 
             <footer>
@@ -157,7 +157,6 @@ $data = mysqli_query($conn, $sql);
 
     <script src="assets/vendors/jquery/jquery.min.js"></script>
     <script src="assets/vendors/summernote/summernote-lite.min.js"></script>
-
 
 <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>

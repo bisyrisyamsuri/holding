@@ -13,7 +13,7 @@ VALUES ('$kategori', '$layanan', '$lat', '$long')";
 
 // Menjalankan query
 if (mysqli_query($conn, $sql))  {
-    header("location:../tambah_layanan.php?alert=berhasil");
+    header("location:../data-layanan.php?alert=berhasil");
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

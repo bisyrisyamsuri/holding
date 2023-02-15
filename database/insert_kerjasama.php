@@ -2,17 +2,16 @@
 require_once('koneksi.php');
 
 // Data yang akan ditambahkan
-$kategori = $_POST["kategori"];
-$target = $_POST["target"];
+$kerjasama = $_POST["kerjasama"];
 
 
 // Query untuk menambahkan data
-$sql = "INSERT INTO tb_kategoribisnis (kategori_bisnis, target_capaian)
-VALUES ('$kategori', '$target')";
+$sql = "INSERT INTO tb_jeniskerjasama (keterangan)
+VALUES ('$kerjasama')";
 
 // Menjalankan query
 if (mysqli_query($conn, $sql)) {
-    header("location:../data-kategori.php?alert=berhasil");
+    header("location:../data-kerjasama.php?alert=berhasil");
 }else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

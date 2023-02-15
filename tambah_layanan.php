@@ -60,6 +60,7 @@ require_once('database/koneksi.php');
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="data-layanan.php">Data Layanan</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Tambah Layanan</li>
                     </ol>
                 </nav>
@@ -85,10 +86,9 @@ require_once('database/koneksi.php');
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group has-icon-left">
-                                                            <label for="first-name-icon">Nama Kategori</label>
+                                                            <label for="first-name-icon">Jenis Kategori</label>
                                                             <div class="position-relative">
                                                             <select class="form-select" id="basicSelect" name="kategori" id="kategori">
-                                                                <option selected > Pilih Kategori </option>
                                                                 <?php 
                                                                 while($data=mysqli_fetch_array($kategori)) {
                                                                 ?>

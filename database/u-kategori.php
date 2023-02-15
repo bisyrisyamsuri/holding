@@ -2,13 +2,12 @@
 require_once('koneksi.php');
 
 // Data yang akan ditambahkan
-$kategori = $_POST["kategori"];
-$target = $_POST["target"];
+$id = $_POST['id_update'];
+$kategori = $_POST["kategori_update"];
+$target = $_POST["target_update"];
 
 
-// Query untuk menambahkan data
-$sql = "INSERT INTO tb_kategoribisnis (kategori_bisnis, target_capaian)
-VALUES ('$kategori', '$target')";
+$sql = "UPDATE tb_kategoribisnis SET kategori_bisnis='$kategori', target_capaian='$target' WHERE id_kategori=$id";
 
 // Menjalankan query
 if (mysqli_query($conn, $sql)) {
